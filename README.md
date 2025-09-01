@@ -15,10 +15,12 @@ Mini-aplicación de gestión de productos con autenticación y roles (admin y us
 3. Configurar variables de entorno (crear archivo .env):
    DB_HOST=localhost
    DB_PORT=5432
-   DB_USER=usuario
-   DB_PASS=contraseña
-   DB_NAME=workmate_test
+   DB_USERNAME=usuario
+   DB_PASSWORD=contraseña
+   DB_DATABASE=workmate_test
    JWT_SECRET=clave_secreta
+   JWT_EXPIRES_IN=3600s
+  
 4. Crear la base de datos en PostgreSQL:
    CREATE DATABASE workmate_test;
 
