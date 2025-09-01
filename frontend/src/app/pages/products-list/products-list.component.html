@@ -1,0 +1,34 @@
+<div class="header">
+  <h1>Sistemas de Productos</h1>
+  <div class="user-actions">
+    <span>Bienvenido, Usuario</span>
+    <button (click)="logout()">Cerrar sesión</button>
+  </div>
+</div>
+
+<div class="subheader">
+  <div>
+    <h2>Lista de Productos</h2>
+    <p>Consulta nuestro catálogo</p>
+  </div>
+</div>
+
+<div *ngIf="loading" class="info-msg">Cargando productos...</div>
+<div *ngIf="error" class="error-msg">{{ error }}</div>
+<div *ngIf="products.length === 0 && !loading" class="info-msg">No hay productos.</div>
+
+<div class="products-list">
+  <div *ngFor="let p of products" class="product-card">
+    <div class="info">
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.description }}</p>
+      <div class="price">$ {{ p.price | number: '1.2-2' }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="pagination">
+  <button (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+  <span>Página {{ page }}</span>
+  <button (click)="nextPage()" [disabled]="page * limit >= total">Siguiente</button>
+</div>

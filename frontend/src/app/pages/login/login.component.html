@@ -1,0 +1,32 @@
+<div class="login-container">
+  <h1>Iniciar Sesión</h1>
+  <p>Ingrese sus credenciales para acceder al sistema</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label>
+      Usuario
+      <input formControlName="username" placeholder="Usuario" />
+    </label>
+    <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error">
+      Usuario requerido
+    </div>
+
+    <label>
+      Contraseña
+      <input type="password" formControlName="password" placeholder="Contraseña" />
+    </label>
+    <div *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched" class="error">
+      La contraseña debe tener al menos 6 caracteres
+    </div>
+
+    <button type="submit">Ingresar</button>
+
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div class="test-credentials">
+      <p><strong>Credenciales de prueba:</strong></p>
+      <p>Admin: <em>admin / admin123</em></p>
+      <p>Usuario: <em>user / user123</em></p>
+    </div>
+  </form>
+</div>

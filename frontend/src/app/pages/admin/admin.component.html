@@ -1,0 +1,58 @@
+<div class="header">
+  <h1>Sistemas de Productos</h1>
+  <div class="user-actions">
+    <span>Bienvenido, Admin</span>
+    <button (click)="logout()">Cerrar sesión</button>
+  </div>
+</div>
+
+
+<div class="subheader">
+  <div>
+    <h2>Lista de Productos</h2>
+    <p>Gestiona tu inventario</p>
+  </div>
+  <button *ngIf="!showForm" (click)="showForm = true">Crear Producto</button>
+</div>
+
+
+<div *ngIf="toast" class="toast" [ngClass]="toast.type">
+  {{ toast.message }}
+</div>
+
+
+<div class="form-container" #formSection *ngIf="showForm">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <input formControlName="name" placeholder="Nombre del producto"/>
+    <input formControlName="description" placeholder="Descripción"/>
+    <input formControlName="price" type="number" placeholder="Precio"/>
+
+    <div class="buttons">
+      <button type="submit" class="submit">
+        {{ editingProduct ? 'Actualizar' : 'Crear' }}
+      </button>
+      <button *ngIf="editingProduct" type="button" (click)="cancelEdit()" class="cancel">
+        Cancelar
+      </button>
+      
+      <button *ngIf="!editingProduct" type="button" (click)="showForm = false" class="cancel">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<div class="products-list">
+  <div *ngFor="let p of products" class="product-card">
+    <div class="info">
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.description }}</p>
+      <div class="price">$ {{ p.price | number: '1.2-2' }}</div>
+    </div>
+    <div class="actions">
+      <button class="edit" (click)="edit(p)">Editar</button>
+      <button class="delete" (click)="delete(p.id!)">Eliminar</button>
+    </div>
+  </div>
+</div>
